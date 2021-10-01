@@ -60,7 +60,7 @@ function ViewEventComponent(props) {
                                position: "relative",
                                width: "100%",
                                minHeight: "30rem", maxHeight: "40rem"}}
-                                src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyBaLU-7p4spFKf611ZrMTTZoQUCC2KMgbg&q=${props.address}`} >
+                                src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyD-RHMlu6_wU6-a0U5JvwPcAhRjoouCGHw&q=${props.address}`} >
                               </iframe>
                           </a>
                           <a className="collection-item">
@@ -157,7 +157,7 @@ function ViewEventComponent(props) {
                                position: "relative",
                                width: "100%",
                                minHeight: "30rem", maxHeight: "40rem"}}
-                                src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyBaLU-7p4spFKf611ZrMTTZoQUCC2KMgbg&q=${props.address}`} >
+                                src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyD-RHMlu6_wU6-a0U5JvwPcAhRjoouCGHw&q=${props.address}`} >
                               </iframe>
                               </div>
                               
