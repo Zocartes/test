@@ -1,56 +1,86 @@
 import React from "react";
-import PlacesAutocomplete, {
-    geocodeByAddress,
-    getLatLng
-} from "react-places-autocomplete";
+const apiUrl = "https://maps.googleapis.com/maps/api/geocode/json?&address=";
 
-function Autocomplete(props) {
-    const [address, setAddress] = React.useState("");
-    const [coordinates, setCoordinates] = React.useState({
-        lat: null,
-        lng: null
-    });
+class GooglePlaces extends React.Component {
 
-    const handleSelect = async value => {
-        const results = await geocodeByAddress(value);
-        const latLng = await getLatLng(results[0]);
-        setAddress(value);
-        setCoordinates(latLng);
-        localStorage.setItem("eventAddress", value);
+  constructor(props) {
+    super(props);
+    this.state = {
+      autocomplete: {},
     };
+  }
+  
+  componentDidMount() {
+    this.initAutocomplete();
+  }
 
+  initAutocomplete() {
+    const autocomplete = new google.maps.places.Autocomplete(
+      (this.refs.autoCompletePlaces), {types: ['geocode']});
+    autocomplete.addListener('place_changed', this.fillInAddress);
+    this.setState({ autocomplete });
+  }
+  
+  geolocate() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        const geolocation = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        };
+      });
+    }
+  }
+
+  fillInAddress() {
+    const componentForm = {
+      street_number: 'short_name',
+      route: 'long_name',
+      locality: 'long_name',
+      administrative_area_level_1: 'short_name',
+      country: 'long_name',
+      postal_code: 'short_name'
+    };
+    // Get the place details from the autocomplete object.
+    const place = autocomplete.getPlace();
+    for (let component in componentForm) {
+      this.refs.component.value = '';
+      this.refs.component.disabled = false;
+    }
+
+    // Get each component of the address from the place details
+    // and fill the corresponding field on the form.
+    for (let i = 0; i < place.address_components.length; i++) {
+      const addressType = place.address_components[i].types[0];
+      if (componentForm[addressType]) {
+        const val = place.address_components[i][componentForm[addressType]];
+        this.refs.addressType.value = val;
+      }
+    }
+  }
+	
+  render() {
     return (
-        <div >
-            <PlacesAutocomplete
-                value={address}
-                onChange={setAddress}
-                onSelect={handleSelect}
-            >
-                {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-                    <div>
+      <div>
+        <h1>Google Places autocomplete</h1>
 
-                        <input name="address" style={{backgroundColor: props.color}} {...getInputProps({ placeholder: "Type address" })} />
-
-                        <div >
-                            {loading ? <div>...loading</div> : null}
-
-                            {suggestions.map(suggestion => {
-                                const style = {
-                                    backgroundColor: suggestion.active ? "#41b6e6" : "#fff",
-                                };
-
-                                return (
-                                    <div {...getSuggestionItemProps(suggestion, { style })}>
-                                        {suggestion.description}
-                                    </div>
-                                );
-                            })}
-                        </div>
-                    </div>
-                )}
-            </PlacesAutocomplete>
+        <div id="locationField">
+          <input 
+            id="autocomplete" 
+            placeholder="Enter your address"
+            onFocus={this.geolocate}
+            onChange={this.handleInputChange}
+            ref="autoCompletePlaces"
+          />
         </div>
+      </div>
     );
+  }
 }
+
+ReactDOM.render(
+  <GooglePlaces />,
+  document.getElementById('root')
+);
 
 export default Autocomplete;
