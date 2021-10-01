@@ -16,7 +16,7 @@ function Autocomplete(props) {
         const latLng = await getLatLng(results[0]);
         setAddress(value);
         setCoordinates(latLng);
-        localStorage.setItem("eventAddress", value);
+        localStorage.setItem("Address", value);
     };
 
     return (

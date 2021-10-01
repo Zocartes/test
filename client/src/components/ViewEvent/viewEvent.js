@@ -32,8 +32,7 @@ function ViewEventComponent(props) {
                       <img
                         src={
                           (props.image) ? props.image :
-                            "https://raw.github.com/ajperkins92/Project-3/master/client/public/images/seattlePark2.jpg"
-                        }
+                          "https://samblog.seattleartmuseum.org/wp-content/uploads/crows-screen-1080px.png"                        }
                         style={{ maxWidth: "100%" }}
                       />
                     </div>
