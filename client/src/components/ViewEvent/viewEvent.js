@@ -59,7 +59,7 @@ function ViewEventComponent(props) {
                                position: "relative",
                                width: "100%",
                                minHeight: "30rem", maxHeight: "40rem"}}
-                                src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyD-RHMlu6_wU6-a0U5JvwPcAhRjoouCGHw&q=${props.address}`} >
+                                src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyCYP600bn1i6-V4wZIyAeVx53Gt9dbAJkw&q=${props.address}`} >
                               </iframe>
                           </a>
                           <a className="collection-item">
@@ -156,7 +156,7 @@ function ViewEventComponent(props) {
                                position: "relative",
                                width: "100%",
                                minHeight: "30rem", maxHeight: "40rem"}}
-                                src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyD-RHMlu6_wU6-a0U5JvwPcAhRjoouCGHw&q=${props.address}`} >
+                                src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyCYP600bn1i6-V4wZIyAeVx53Gt9dbAJkw&q=${props.address}`} >
                               </iframe>
                               </div>
                               
