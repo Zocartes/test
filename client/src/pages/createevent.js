@@ -31,7 +31,7 @@ class CreateEvent extends React.Component {
         axios.post("/event", formData)
             .then((response) => {
                 console.log(response);
-                localStorage.setItem("eventAddress", "")
+                localStorage.setItem("eventAddress", "address")
                 window.location.replace("/");
             })
             .catch(function (error) {
